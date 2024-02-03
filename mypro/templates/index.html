@@ -34,7 +34,19 @@
             <li class="nav-item">
               <a class="nav-link text-light" href="{% url 'about' %}">About</a>
             </li>
+            {% if request.user.is_authenticated %}
             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Account
+              </a>
+              <ul class="dropdown-menu bg-dark">
+                
+
+                <li><a class="dropdown-item text-light" href="{% url 'support' %}">support</a></li>
+              </ul>
+            </li>
+            {% else %}            
+              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Account
               </a>
@@ -44,19 +56,15 @@
                 <li><a class="dropdown-item text-light " href="{% url 'signup' %}">signup</i></a></li>
                 <li><hr class="dropdown-divider text-light"></li>
                 <li><a class="dropdown-item text-light" href="{% url 'support' %}">support</a></li>
-                
               </ul>
-            </li>
-            <li class="nav-item">
-           
-            </li>
+            {% endif %}
           </ul>
+          
 
           
         
 
           {% if request.user.is_authenticated %}
-          
           <a class="text-light  ms-auto" href="{% url 'user_logout' %}"><i class="fa-solid fa-right-from-bracket my-2  mx-2 fs-4"></i></a>
           <h3 class="  mx-2 text-light m">{{request.user.username}}</h3>
           <a href="{% url 'view_cart' %}" class="btn "><i class="fa-solid fa-cart-shopping text-light fs-4 "></i></a> 
@@ -246,7 +254,8 @@
       </div>
     </div>
     
-
+    {% if request.user.is_authenticated %}
+    {% else %}
     <div class="container-fluid lo py-5 mb-5">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 text-center my-3">
@@ -261,7 +270,7 @@
         </div>
       </div>
     </div>
-
+    {% endif %}
     <!-- Site footer -->
     <footer class="site-footer">
       <div class="container">
